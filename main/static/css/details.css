@@ -1,0 +1,204 @@
+/* Font Face Definitions */
+@font-face {
+  font-family: 'PiersonDemo';
+  src: url('/static/fonts/PiersonDemo.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BDScriptBold';
+  src: url('/static/fonts/BDScript-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'josefin-sans-light';
+  src: url('/static/fonts/JosefinSans-Light.ttf') format('truetype');
+}
+
+/* Universal Box-Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Main Container */
+.details-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--dl-space-space-twounits);
+  background-color: #EDEAE7;
+  color: #56513D;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Title */
+.details-text {
+  font-size: 5em;
+  font-family: 'PiersonDemo';
+  color: #56513D;
+  font-weight: lighter;
+}
+
+/* Event Containers */
+.details-container1 {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  color: #56513D;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Added container for spacing adjustments */
+.details-event-wrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.details-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #56513D;
+  margin: 20px;
+}
+
+.details-image {
+  width: 200px;
+  height: var(--dl-size-size-xlarge);
+  object-fit: cover;
+}
+
+.details-image-dance {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.details-image-chuppah {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Headings and Text */
+.details-heading {
+  margin-top: -20px;
+  font-size: 5em;
+  font-family: 'BDScriptBold';
+  color: #56513D;
+  white-space: nowrap;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+
+.details-heading2 {
+  font-size: 1.5em;
+  font-family: 'josefin-sans-light';
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5em;
+  color: #56513D;
+}
+
+.details-time {
+  font-size: 1.5em;
+  font-family: 'PiersonDemo';
+  font-weight: bold;
+  color: #56513D;
+  margin-top: -20px;
+  letter-spacing: 0.1em;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .details-container1 {
+    flex-direction: column;
+    gap: 64px;
+  }
+}
+
+@media(max-width: 950px) {
+  .details-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 0px;
+  }
+
+  .details-image-dance {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 0px;
+  }
+
+  .details-image-chuppah {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 0px;
+  }
+
+  .details-heading {
+    font-size: 7em;
+    font-weight: lighter;
+  }
+
+  .details-time {
+    font-size: 1.5em;
+
+  }
+
+}
+
+@media (max-width: 485px) {
+  .details-container1 {
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 5px;
+  }
+
+  .details-container {
+    overflow-x: hidden;
+    width: 100%;
+    margin: auto;
+    padding: 0 5px;
+  }
+
+  .details-image-chuppah {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    margin-bottom: 0;
+  }
+
+  .details-event-wrapper {
+    margin: 0px;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .details-heading {
+    font-size: 6em;
+    font-weight: lighter;
+  }
+
+  .details-time {
+    margin-top: -30px;
+  }
+
+  .details-event {
+    margin-bottom: 10px;
+  }
+}

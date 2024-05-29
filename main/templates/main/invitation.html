@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invitation</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"> 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/details_he.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gallery-date.css' %}">
+    <link rel="stylesheet" href="{% static 'css/location.css' %}">
+    <link rel="stylesheet" href="{% static 'css/useful-info.css' %}">
+    <style>
+        body {
+            background-color: #EDEAE7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            width: 100%;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+        /* Home container settings */
+        .home-container {
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            display: flex; /* Ensure flex properties apply */
+            flex-direction: column; /* Stack children vertically */
+            margin: 0 auto; /* Center horizontally */
+        }
+        .hero-container {
+            background-image: url("{% static 'images/backround-1500w.png' %}");
+            width: 100%;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                align-items: canter;
+                justify-content: center;
+                width: 100%;
+                margin: auto;
+                padding: 0;
+                overflow-x: hidden;
+            }
+        }
+    </style>
+    <meta property="og:title" content="Invitation" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="home-container">
+        {% if guest.country == "Israel" %}
+            {% include 'main/includes/hero_he.html' %}
+            {% include 'main/includes/gallery-date.html' %}
+            {% include 'main/includes/details_he.html' %}
+            {% include 'main/includes/location_he.html' %}
+            {% include 'main/includes/useful_info_he.html' %}
+        {% else %}
+            {% include 'main/includes/hero.html' %}
+            {% include 'main/includes/gallery-date.html' %}
+            {% include 'main/includes/details.html' %}
+            {% include 'main/includes/location.html' %}
+            {% include 'main/includes/useful_info.html' %}
+        {% endif %}
+    </div>
+    <script defer src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+</body>
+</html>

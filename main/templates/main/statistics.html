@@ -1,0 +1,11 @@
+<!-- main/templates/main/statistics.html -->
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>Statistics:</h1>
+    <p>Total number of parties: {{ total_parties }}</p>
+    <p>Number of parties attending: {{ attending_parties }}</p>
+    <p>Number of parties not attending: {{ not_attending_parties }}</p>
+    <p>Number of parties that didn't confirm: {{ not_confirmed_parties }}</p>
+    <p>Total number of guests invited: {{ total_guests_invited }}</p>
+    <p>Total number of guests attending: {{ total_guests_attending }}</p>
+{% endblock %}

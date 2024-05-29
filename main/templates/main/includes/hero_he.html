@@ -1,0 +1,76 @@
+{% load static %}
+<!-- main/includes/hero.html -->
+<div class="home-container">
+    <div class="hero-container">
+        <header data-thq="thq-navbar" class="hero-navbar-interactive hero-navbar">
+            <div data-thq="thq-navbar-nav" class="hero-desktop-menu">
+                <a href="#Invitation" class="hero-link">
+                    <img alt="image" src="{% static 'images/save1-200h.png' %}" class="hero-image" />
+                </a>
+                <nav class="hero-links">
+                    <a href="#UsefulInfo" class="hero-link2"><span>פרטים נוספים</span></a>
+                    <a href="#Details" class="hero-link1"><span>החתונה</span></a>
+                    <a href="#Location" class="hero-link2"><span>מיקום</span></a>
+                </nav>
+                <a href="#RSVP" class="hero-text3"><span>אישור הגעה</span></a>
+            </div>
+            <div data-thq="thq-burger-menu" class="hero-burger-menu">
+                <svg viewBox="0 0 1024 1024" class="hero-icon">
+                    <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+                </svg>
+            </div>
+            <div data-thq="thq-mobile-menu" class="hero-mobile-menu">
+                <div class="hero-nav">
+                    <div class="hero-top">
+                        <div data-thq="thq-close-menu" class="hero-close-menu">
+                            <svg viewBox="0 0 1024 1024" class="hero-icon2">
+                                <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <nav class="hero-links1">
+                        <a href="#Details" class="hero-link3"><span>החתונה</span></a>
+                        <a href="#Location" class="hero-link4"><span>מיקום</span></a>
+                        <a href="#UsefulInfo" class="hero-link5"><span>פרטים נוספים</span></a>
+                        <a href="#RSVP" class="hero-link5"><span>אישור הגעה</span></a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <img alt="image" src="{% static 'images/envalope-600w.png' %}" id="Invitation" class="hero-image1">
+        <div id="RSVP" class="rsvp-container rsvp-root-class-name1">
+            <h1><span>{{ guest.name }}</span></h1>
+            <span class="rsvp-text1"><span>אנא אשר/י הגעתך</span></span>
+            <div class="rsvp-container1" id="rsvpContainer">
+                <form action="{% url 'response' guest.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="button-container">
+                        <button type="submit" name="response" value="not_attending" class="rsvp-button"><span><span>לא אגיע</span></span></button>
+                        <button type="button" onclick="showAttendForm()" class="rsvp-button1"><span><span>אגיע</span></span></button>
+                    </div>
+                    <div id="attendForm" class="attend-form" style="display:none;">
+                        <label for="num_guests" class="attend-label" style="direction: rtl;">כמה אורחים מגיעים ?</label>
+                        <input type="number" id="num_guests" name="num_guests" min="1" value="1" class="attend-input">
+                        <button type="submit" class="rsvp-button" name="response" value="attending"><span>שלח</span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showAttendForm() {
+        var form = document.getElementById('attendForm');
+        var container = document.getElementById('rsvpContainer');
+        if (form.style.display === "none") {
+            form.style.display = "flex";
+            container.style.maxHeight = (container.scrollHeight + form.scrollHeight) + "px";
+        } else {
+            form.style.display = "none";
+            container.style.maxHeight = "initial"; // Reset to initial height
+        }
+    }
+</script>
+
+

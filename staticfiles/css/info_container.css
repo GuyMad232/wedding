@@ -1,0 +1,57 @@
+.info {
+    width: 100%;
+    margin: 20px 0;
+    /* Vertical margin only, allows for better control */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    /* Adjusts width accounting for padding */
+    max-width: 800px;
+    /* Adjust maximum width */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.info-image {
+    width: 50%;
+    height: auto;
+    /* Maintains aspect ratio */
+}
+
+.info-text {
+    width: 50%;
+    padding: 0 20px;
+    text-align: left;
+    /* Align text left by default */
+}
+
+.image-right .info-image {
+    order: 2;
+}
+
+.image-right .info-text {
+    order: 1;
+    text-align: right;
+    /* Aligns text to the right when image is on the right */
+}
+
+@media (max-width: 768px) {
+    .info-content {
+        flex-direction: column;
+    }
+
+    .info-image,
+    .info-text {
+        width: 100%;
+        order: unset;
+        text-align: center;
+        /* Centers text for smaller screens */
+    }
+}

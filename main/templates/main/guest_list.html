@@ -1,0 +1,40 @@
+<!-- main/templates/main/guest_list.html -->
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/guest_list.css' %}">
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Country</th>
+            <th>Attending</th>
+            <th>Guests Invited</th>
+            <th>Guests Attending</th>
+            <th>Message</th>
+            <th>Email Sent</th>
+            <th>id</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for guest in guests %}
+        <tr>
+            <td>{{ guest.name }}</td>
+            <td>{{ guest.email }}</td>
+            <td>{{ guest.phone }}</td>
+            <td>{{ guest.country }}</td>
+            <td>{{ guest.attending }}</td>
+            <td>{{ guest.number_of_guests_invited }}</td>
+            <td>{{ guest.number_of_guests_attending }}</td>
+            <td>{{ guest.message }}</td>
+            <td>{{ guest.email_sent }}</td>
+            <td>{{ guest.identification }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

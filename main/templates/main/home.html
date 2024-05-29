@@ -1,0 +1,22 @@
+<!-- main/templates/main/home.html -->
+{% extends 'main/base.html' %}
+{% block content %}
+    <div class="welcome-container">
+        <h1>Welcome to Our Wedding Site</h1>
+        <!-- Form for sending email invitations -->
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="send_invitations" class="action-button">Send Email Invitations</button>
+        </form>
+        <!-- Form for importing guests -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="guest_file" accept=".xlsx,.xlsm,.xltx,.xltm" required>
+            <button type="submit" name="import_guests" class="action-button">Import Guests</button>
+        </form>
+        <!-- Form for exporting guests -->
+        <form method="get" action="{% url 'export_guests' %}">
+            <button type="submit" class="action-button">Export Guests</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+# Ignore virtual environment
+/djangoenv 
+
+
+# Ignore Python bytecode
+__pycache__/
+
+
+# Ignore Django migrations
+*/migrations/
+
+
+# Ignore static files
+main/static/images/en_animation_compressed.png
+
+
+
+# Ignore IDE/editor files
+.vscode/
+.idea/

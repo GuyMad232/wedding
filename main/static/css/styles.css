@@ -1,0 +1,83 @@
+/* Ensure the body padding-top accounts for the navbar's height */
+body {
+    margin: 20px;
+    padding-top: 60px;
+    /* Adjust this value if navbar height changes */
+    font-family: Arial, sans-serif;
+    background-color: #EDEAE7;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* General content styles */
+.content {
+    width: 100%;
+    max-width: 1200px;
+    /* Limit maximum width */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    /* Space from navbar */
+}
+
+/* Welcome container styles */
+.welcome-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #EDEAE7;
+    border-radius: 8px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    /* Adds gap between the buttons */
+}
+
+.action-button {
+    width: 200px;
+    padding: 10px 20px;
+    margin: 5px 0;
+    /* Optional: further control over margins */
+    background-color: #56513D;
+    /* Green background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.action-button:hover {
+    background-color: #4d4835;
+    scale: (1.1);
+    /* Darker green on hover */
+}
+
+/* Media queries to adjust content width on different devices */
+@media (max-width: 600px) {
+    .content {
+        padding: 10px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 992px) {
+    .content {
+        padding: 15px;
+    }
+}
+
+@media (min-width: 993px) {
+    .content {
+        padding: 20px;
+    }
+}

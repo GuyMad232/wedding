@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Wedding App{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+</head>
+<body>
+    {% if show_navbar %}
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}">Aaliyah & Guy</a>
+        </div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'guest_list' %}">Guest List</a></li>
+                <li><a href="{% url 'invitation' 'admin' '0' %}">Invitation</a></li>
+                <li><a href="{% url 'statistics' %}">Statistics</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    <footer class="footer-section">
+        <div class="footer-content">
+            <p>Phone: 0522505756</p>
+            <p>Email: <a href="mailto:guymaduel2302@gmail.com">guymaduel2302@gmail.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.getElementById('nav-toggle');
+        const nav = document.querySelector('nav');
+        const navToggleLabel = document.querySelector('.nav-toggle-label span');
+
+        if (navToggle) {
+            navToggle.addEventListener('change', function () {
+                if (navToggle.checked) {
+                    nav.style.transform = 'scale(1, 1)';
+                } else {
+                    nav.style.transform = 'scale(1, 0)';
+                }
+            });
+
+            navToggleLabel.addEventListener('click', function () {
+                navToggle.checked = !navToggle.checked;
+                nav.style.transform = navToggle.checked ? 'scale(1, 1)' : 'scale(1, 0)';
+            });
+        }
+    });
+</script>
+</body>
+</html>
