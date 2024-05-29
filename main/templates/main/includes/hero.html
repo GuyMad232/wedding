@@ -53,7 +53,7 @@
         
           
         <div id="RSVP" class="rsvp-container rsvp-root-class-name1">
-            <h1><span>{{ guest.name }}</span></h1>
+            <h1 class="guest-name"><span>{{ guest.name }}</span></h1>
             <span class="rsvp-text1"><span>Please confirm your attendance</span></span>
             <div class="rsvp-container1" id="rsvpContainer">
                 <form action="{% url 'response' guest.id %}" method="post">

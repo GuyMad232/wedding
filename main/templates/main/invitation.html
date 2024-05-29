@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Invitation</title>
+    <link rel="preload" href="{% static 'images/background-1500w.png' %}" as="image">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap">
@@ -43,9 +45,20 @@
             margin: 0 auto; /* Center horizontally */
         }
         .hero-container {
-            background-image: url("{% static 'images/backround-1500w.png' %}");
+            background-image: url("{% static 'images/background-1500w.png' %}");
             width: 100%;
         }
+
+        .background-container-last {
+            height: 95vh; /* Full viewport height */
+            width: 95vw; /* Full viewport width */
+            background-image: url("{% static 'images/background.jpg' %}");
+            background-size: cover; /* Stretch and cover the entire div */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+            background-position: center; /* Center the image */
+            border-radius: 10px; /* Add rounded edges if necessary */
+            overflow: hidden; /* Ensure content stays within the rounded edges */
+          }
 
         @media (max-width: 500px) {
             body {
@@ -76,6 +89,7 @@
             {% include 'main/includes/details.html' %}
             {% include 'main/includes/location.html' %}
             {% include 'main/includes/useful_info.html' %}
+            {% include 'main/includes/gallery-date2.html' %}
         {% endif %}
     </div>
     <script defer src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
