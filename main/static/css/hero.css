@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'PiersonDemo';
+  src: url('/static/fonts/PiersonDemo.ttf') format('truetype');
+  color: #56513D;
+}
+
+@font-face {
+  font-family: 'josefin-sans-light';
+  src: url('/static/fonts/JosefinSans-Light.ttf') format('truetype');
+}
+
 .rsvp-container {
   gap: var(--dl-space-space-twounits);
   width: 100%;
@@ -62,6 +73,7 @@
   /* Adjust this size as needed */
   font-style: normal;
   text-align: center;
+  font-family: 'josefin-sans-light';
   font-weight: 400;
   border: none;
   margin-bottom: 20px;
@@ -182,12 +194,6 @@
   margin-bottom: 0;
   flex-direction: row;
   justify-content: center;
-}
-
-@font-face {
-  font-family: 'PiersonDemo';
-  src: url('/static/fonts/PiersonDemo.ttf') format('truetype');
-  color: #56513D;
 }
 
 /* Ensure all links and text are black and bold */
