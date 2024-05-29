@@ -72,6 +72,12 @@
             .es-desk-hidden { display:table-row!important; width:auto!important; overflow:visible!important; max-height:inherit!important }
         }
         @media screen and (max-width:384px) {.mail-message-content { width:414px!important } }
+        img.scale-on-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+        img.scale-on-hover:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body data-new-gr-c-s-loaded="14.1174.0" style="width:100%;font-family:arial, 'helvetica neue', helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
@@ -125,7 +131,7 @@
                                                         <tr>
                                                             <td style="padding:0;Margin:0">
                                                                 <a href="{{ invitation_url }}" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#2CB543;font-size:14px">
-                                                                    <img alt="Invitation" src="{{ static_image_url }}" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-width:100%;height:auto;margin-top:20px">
+                                                                    <img alt="Invitation" src="{{ static_image_url }}" class="scale-on-hover" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-width:100%;height:auto;margin-top:20px">
                                                                 </a>
                                                             </td>
                                                         </tr>
