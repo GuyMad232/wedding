@@ -488,3 +488,10 @@
     margin: -20px;
   }
 }
+
+@media(max-width: 400px) {
+  .play-button {
+    left: calc(50% - 47vw);
+  }
+
+}
