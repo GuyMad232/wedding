@@ -128,9 +128,6 @@ def export_guests(request):
     return response
 
 
-# Path to the APNG file in your static files directory
-APNG_PATH = os.path.join(settings.BASE_DIR, 'main', 'static', 'images', 'en_animation_compressed.png')
-
 @never_cache  # Prevent Django's cache middleware from interfering
 def cached_serve(request, path, document_root=None, show_indexes=False):
     print("Request received for APNG file.")
@@ -141,6 +138,7 @@ def cached_serve(request, path, document_root=None, show_indexes=False):
         print("APNG file served from cache.")
         response = HttpResponse(cached_response, content_type='image/apng')
         response['X-Cache'] = 'HIT'
+        response['Cache-Control'] = 'public, max-age=31536000'
         return response
 
     file_path = os.path.join(document_root, path)
@@ -151,6 +149,7 @@ def cached_serve(request, path, document_root=None, show_indexes=False):
             cache.set(cache_key, response_content, timeout=None)
             print("APNG file served from file system and cached.")
             response['X-Cache'] = 'MISS'
+            response['Cache-Control'] = 'public, max-age=31536000'
             return response
     except FileNotFoundError:
         print("APNG file not found.")
