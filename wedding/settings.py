@@ -59,7 +59,9 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'path.to.cache_middleware.CacheControlMiddleware', 
 ]
+
 
 
 ROOT_URLCONF = 'wedding.urls'
