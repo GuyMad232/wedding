@@ -11,6 +11,7 @@ urlpatterns = [
     path('response/<int:guest_id>/', views.guest_response, name='response'),
     path('statistics/', views.statistics, name='statistics'),
     path('export_guests/', views.export_guests, name='export_guests'),
+    path('serve_apng/', views.serve_apng, name='serve_apng'),
 ]
 
 if settings.DEBUG:

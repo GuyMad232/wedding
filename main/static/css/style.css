@@ -111,21 +111,7 @@
   background-color: var(--dl-color-theme-neutral-light);
 }
 
-.background-last-container {
-  height: 95vh;
-  width: 95vw;
-  background-image: url("{% static 'images/backround.jpeg' %}");
-  background-size: contain;
-  /* Make the picture contained */
-  background-repeat: no-repeat;
-  /* Prevent the background from repeating */
-  background-position: center;
-  /* Center the image */
-  border-radius: 10px;
-  /* Add rounded edges */
-  overflow: hidden;
-  /* Ensure the content stays within the rounded edges */
-}
+
 
 
 .thq-button-filled {

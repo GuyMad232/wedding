@@ -3,7 +3,7 @@
 <div class="home-container">
     <div class="hero-container">
         <header data-thq="thq-navbar" class="hero-navbar-interactive hero-navbar">
-            <div class = "logo">
+            <div class="logo">
                 <a href="#Invitation" class="hero-link">
                     <img alt="image" src="{% static 'images/save1-200h.png' %}" class="hero-image" />
                 </a>
@@ -24,7 +24,6 @@
                     <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
                 </svg>
             </div>
-           
             <div data-thq="thq-mobile-menu" class="hero-mobile-menu">
                 <div class="hero-nav">
                     <div class="hero-top">
@@ -47,11 +46,9 @@
         <div class="invitation-container">
             <img src="{% static 'images/play-button.png' %}" alt="Play Animation" onclick="replayAnimation()" class="play-button">
             {% comment %} <img alt="image" src="https://dl.dropboxusercontent.com/scl/fi/obpiuaj7q7q51qa3savp1/en_animation.png?rlkey=xl7o2an8ihoi6rikgj8e77i9h&st=oojrp3ei" id="Invitation" class="hero-image1"> {% endcomment %}    
-            <img alt="image" src="{% static 'images/en_animation_compressed.png' %}" id="Invitation" class="hero-image1" />
-
+            <img alt="image" src="{% url 'serve_apng' %}" id="Invitation" class="hero-image1" />
         </div>
         
-          
         <div id="RSVP" class="rsvp-container rsvp-root-class-name1">
             <h1 class="guest-name"><span>{{ guest.name }}</span></h1>
             <span class="rsvp-text1"><span>Please confirm your attendance</span></span>
@@ -92,6 +89,4 @@
         img.src = ""; // Clear the src to reset the animation
         img.src = src; // Reassign the src to restart the animation
     }
-    </script>
-
-
+</script>

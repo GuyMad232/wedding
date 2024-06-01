@@ -12,6 +12,7 @@ from django.urls import reverse
 from .models import GuestList, Guest
 from django.conf import settings
 from django.db.models import Sum
+from django.views.decorators.cache import cache_page
 import tempfile
 import os
 from django.core.management import call_command
@@ -124,6 +125,23 @@ def export_guests(request):
     response['Content-Disposition'] = 'attachment; filename=guest_list.xlsx'
     wb.save(response)
     return response
+
+
+# Path to the APNG file in your static files
+APNG_PATH = os.path.join(settings.BASE_DIR, 'main', 'static', 'images', 'en_animation_compressed.png')
+
+@cache_page(60 * 60 * 24 * 365 * 10)  # Cache for 10 years
+def serve_apng(request):
+    logger.info("Serving APNG file.")
+    try:
+        with open(APNG_PATH, 'rb') as apng_file:
+            response = HttpResponse(apng_file.read(), content_type='image/apng')
+            response['Content-Disposition'] = 'inline; filename="en_animation_compressed.png"'
+            return response
+    except FileNotFoundError:
+        logger.error("APNG file not found.")
+        return HttpResponse(status=404)
+    
 
 def invitation(request, name, identification):
     # Determine if the navbar should be shown based on 'admin' access
