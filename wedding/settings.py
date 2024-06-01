@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'wedding.CacheControlMiddleware', 
+    'wedding.cache_middleware.CacheControlMiddleware', 
 ]
 
 
