@@ -11,7 +11,7 @@ urlpatterns = [
     path('response/<int:guest_id>/', views.guest_response, name='response'),
     path('statistics/', views.statistics, name='statistics'),
     path('export_guests/', views.export_guests, name='export_guests'),
-    path('serve_apng/', views.serve_apng, name='serve_apng'),
+    path('serve_apng/', views.cached_serve, {'path': 'images/en_animation_compressed.png', 'document_root': settings.BASE_DIR / 'main' / 'static'}, name='serve_apng'),
 ]
 
 if settings.DEBUG:

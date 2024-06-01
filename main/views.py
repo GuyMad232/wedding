@@ -12,7 +12,8 @@ from django.urls import reverse
 from .models import GuestList, Guest
 from django.conf import settings
 from django.db.models import Sum
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import never_cache
+from django.core.cache import cache
 import tempfile
 import os
 from django.core.management import call_command
@@ -127,19 +128,32 @@ def export_guests(request):
     return response
 
 
-# Path to the APNG file in your static files
+# Path to the APNG file in your static files directory
 APNG_PATH = os.path.join(settings.BASE_DIR, 'main', 'static', 'images', 'en_animation_compressed.png')
 
-@cache_page(60 * 60 * 24 * 365 * 10)  # Cache for 10 years
-def serve_apng(request):
-    logger.info("Serving APNG file.")
+@never_cache  # Prevent Django's cache middleware from interfering
+def cached_serve(request, path, document_root=None, show_indexes=False):
+    print("Request received for APNG file.")
+    cache_key = 'serve_apng_' + path
+    cached_response = cache.get(cache_key)
+
+    if cached_response:
+        print("APNG file served from cache.")
+        response = HttpResponse(cached_response, content_type='image/apng')
+        response['X-Cache'] = 'HIT'
+        return response
+
+    file_path = os.path.join(document_root, path)
     try:
-        with open(APNG_PATH, 'rb') as apng_file:
-            response = HttpResponse(apng_file.read(), content_type='image/apng')
-            response['Content-Disposition'] = 'inline; filename="en_animation_compressed.png"'
+        with open(file_path, 'rb') as f:
+            response_content = f.read()
+            response = HttpResponse(response_content, content_type='image/apng')
+            cache.set(cache_key, response_content, timeout=None)
+            print("APNG file served from file system and cached.")
+            response['X-Cache'] = 'MISS'
             return response
     except FileNotFoundError:
-        logger.error("APNG file not found.")
+        print("APNG file not found.")
         return HttpResponse(status=404)
     
 
