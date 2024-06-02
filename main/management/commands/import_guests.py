@@ -29,10 +29,13 @@ class Command(BaseCommand):
                 defaults={'description': 'Auto-created main guest list'}
             )
 
+            # Delete all existing guests
+            Guest.objects.all().delete()
+            logging.info("All existing guests have been deleted.")
+
             with transaction.atomic():
                 for row in ws.iter_rows(min_row=2, values_only=True):
                     row_number += 1
-                   # Handling 'attending' value
                     attending = row[4] if len(row) > 4 and isinstance(row[4], bool) else None if len(row) > 4 and not row[4] else str(row[4]).strip().lower() in ['yes', 'true', '1'] if len(row) > 4 and row[4] else False
                     email_sent_value = str(row[8]).strip().lower() if len(row) > 8 and row[8] is not None else 'false'
                     email_sent = email_sent_value in ['yes', 'true', '1']
@@ -41,20 +44,18 @@ class Command(BaseCommand):
                     logging.info(f"Processing row {row_number}: {row}")
                     logging.info(f"Parsed values - Attending: {attending}, Email Sent: {email_sent}")
 
-                    guest, created = Guest.objects.update_or_create(
+                    guest = Guest.objects.create(
+                        guest_list=guest_list,
+                        name=row[0].strip() if row[0] else "",
                         email=row[1].strip(),
-                        defaults={
-                            'guest_list': guest_list,
-                            'name': row[0].strip() if row[0] else "",
-                            'phone': str(row[2]).strip() if row[2] else "",
-                            'country': row[3].strip() if row[3] else "",
-                            'attending': attending,
-                            'number_of_guests_invited': int(row[5]) if row[5] else 0,
-                            'number_of_guests_attending': int(row[6]) if row[6] else 0,
-                            'message': message,
-                            'email_sent': email_sent,
-                            'identification': row_number - 1
-                        }
+                        phone=str(row[2]).strip() if row[2] else "",
+                        country=row[3].strip() if row[3] else "",
+                        attending=attending,
+                        number_of_guests_invited=int(row[5]) if row[5] else 0,
+                        number_of_guests_attending=int(row[6]) if row[6] else 0,
+                        message=message,
+                        email_sent=email_sent,
+                        identification=row_number - 1
                     )
 
             self.stdout.write(self.style.SUCCESS('Guests imported successfully.'))
