@@ -128,32 +128,8 @@ def export_guests(request):
     return response
 
 
-@never_cache  # Prevent Django's cache middleware from interfering
-def cached_serve(request, path, document_root=None, show_indexes=False):
-    print("Request received for APNG file.")
-    cache_key = 'serve_apng_' + path
-    cached_response = cache.get(cache_key)
-
-    if cached_response:
-        print("APNG file served from cache.")
-        response = HttpResponse(cached_response, content_type='image/apng')
-        response['X-Cache'] = 'HIT'
-        response['Cache-Control'] = 'public, max-age=31536000'
-        return response
-
-    file_path = os.path.join(document_root, path)
-    try:
-        with open(file_path, 'rb') as f:
-            response_content = f.read()
-            response = HttpResponse(response_content, content_type='image/apng')
-            cache.set(cache_key, response_content, timeout=None)
-            print("APNG file served from file system and cached.")
-            response['X-Cache'] = 'MISS'
-            response['Cache-Control'] = 'public, max-age=31536000'
-            return response
-    except FileNotFoundError:
-        print("APNG file not found.")
-        return HttpResponse(status=404)
+def serve_apng(request):
+    return redirect('https://d16bqg9cd7djd.cloudfront.net/en_animation_compressed.png')
     
 
 def invitation(request, name, identification):
