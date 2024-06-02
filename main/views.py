@@ -26,19 +26,17 @@ logger = logging.getLogger(__name__)
 
 def home(request):
     guests = Guest.objects.all()
-    base_url = "https://wedding-sjyr.onrender.com/invitation"  # Update with your actual URL
+    
     if request.method == 'POST':
         if 'send_invitations' in request.POST:
             for guest in guests:
-                if not guest.email_sent:  # Only send email if email_sent is False
+                if not guest.email_sent:
                     try:
-                        # Base64 encoded image (for example purposes)
                         static_image_url = "https://dl.dropboxusercontent.com/scl/fi/ruo4jlhoj3ajjobe7yfe4/email_envalope.png?rlkey=imzfzzp9dghevrqneuxcc1s0k&st=ssjaknly"
                         
-                        # Render the email template with the context
                         context = {
                             'guest_name': guest.name,
-                            'invitation_url': f"{base_url}/{guest.name}/{guest.identification}",
+                            'invitation_url': f"https://wedding-sjyr.onrender.com/invitation/{guest.name}/{guest.identification}",
                             'static_image_url': static_image_url
                         }
                         
@@ -93,7 +91,9 @@ def home(request):
                 messages.error(request, "No file uploaded.")
             return redirect('home')
 
-    return render(request, 'main/home.html', {'show_navbar': True})
+    # Ensure fetching the latest data
+    guests = Guest.objects.all()
+    return render(request, 'main/home.html', {'show_navbar': True, 'guests': guests})
 
 
 def export_guests(request):
@@ -210,10 +210,14 @@ def guest_response(request, guest_id):
 
 
 
-
+@never_cache
 def guest_list(request):
     guests = Guest.objects.all()
+    logger.info(f"Fetched {len(guests)} guests")
+    for guest in guests:
+        logger.info(f"Guest: {guest.name}, Attending: {guest.attending}, Guests Attending: {guest.number_of_guests_attending}")
     return render(request, 'main/guest_list.html', {'guests': guests, 'show_navbar': True})
+
 
 
 def statistics(request):
