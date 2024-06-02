@@ -129,7 +129,7 @@ def export_guests(request):
 
 
 def serve_apng(request):
-    return redirect('https://d16bqg9cd7djd.cloudfront.net/en_animation_compressed.png')
+    return redirect('https://d16bqg9cd7djd.cloudfront.net/en_animation.webp')
     
 
 def invitation(request, name, identification):

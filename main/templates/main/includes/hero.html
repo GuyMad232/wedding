@@ -45,7 +45,6 @@
      
         <div class="invitation-container">
             <img src="{% static 'images/play-button.png' %}" alt="Play Animation" onclick="replayAnimation()" class="play-button">
-            {% comment %} <img alt="image" src="https://dl.dropboxusercontent.com/scl/fi/obpiuaj7q7q51qa3savp1/en_animation.png?rlkey=xl7o2an8ihoi6rikgj8e77i9h&st=oojrp3ei" id="Invitation" class="hero-image1"> {% endcomment %}    
             <img alt="image" src="{% url 'serve_apng' %}" id="Invitation" class="hero-image1" />
         </div>
         
@@ -53,7 +52,7 @@
             <h1 class="guest-name"><span>{{ guest.name }}</span></h1>
             <span class="rsvp-text1"><span>Please confirm your attendance</span></span>
             <div class="rsvp-container1" id="rsvpContainer">
-                <form action="{% url 'response' guest.id %}" method="post">
+                <form id="rsvpForm" action="{% url 'response' guest.id %}" method="post">
                     {% csrf_token %}
                     <div class="button-container">
                         <button type="button" onclick="showAttendForm()" class="rsvp-button1"><span><span>WILL ATTEND</span></span></button>
@@ -89,4 +88,12 @@
         img.src = ""; // Clear the src to reset the animation
         img.src = src; // Reassign the src to restart the animation
     }
+
+    // Add event listener to the form submission
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('rsvpForm');
+        form.addEventListener('submit', function(event) {
+            alert("Your response has been recorded successfully.");
+        });
+    });
 </script>
