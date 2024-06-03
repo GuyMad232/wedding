@@ -1,17 +1,11 @@
-/* Font Face Definitions */
 @font-face {
-  font-family: 'PiersonDemo';
-  src: url('/static/fonts/PiersonDemo.ttf') format('truetype');
+  font-family: 'zrima';
+  src: url('/static/fonts/Hebrew_zrima-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'BDScriptBold';
-  src: url('/static/fonts/BDScript-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'josefin-sans-light';
-  src: url('/static/fonts/JosefinSans-Light.ttf') format('truetype');
+  font-family: 'josefin-sans-he';
+  src: url('/static/fonts/Josefin_sans_he-Regular.ttf') format('truetype');
 }
 
 /* Universal Box-Sizing */
@@ -33,6 +27,8 @@
   color: #56513D;
   overflow: hidden;
   text-align: center;
+  direction: rtl;
+  /* Set the direction to RTL */
 }
 
 /* Title */
@@ -46,15 +42,27 @@
 /* Event Containers */
 .details-container1-he {
   width: 100%;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 1250px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
   gap: 32px;
   color: #56513D;
   margin: 0 auto;
   overflow: hidden;
-  position: relative;
+  direction: rtl;
+  /* Set the direction to RTL */
+  padding-left: 64px;
+}
+
+/* Added container for spacing adjustments */
+.details-event-wrapper-he {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  direction: ltr;
+  /* Set the direction back to LTR for child elements */
 }
 
 .details-event-he {
@@ -85,15 +93,20 @@
 
 /* Headings and Text */
 .details-heading-he {
-  font-size: 5em;
-  font-family: 'BDScriptBold';
+  margin-top: -20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 4em;
+  font-family: 'zrima';
   color: #56513D;
   white-space: nowrap;
+  font-weight: 200;
+  text-rendering: optimizeLegibility;
 }
 
 .details-heading2-he {
   font-size: 1.5em;
-  font-family: 'josefin-sans-light';
+  font-family: 'josefin-sans-he';
   font-weight: bold;
   text-align: center;
   line-height: 1.5em;
@@ -105,12 +118,96 @@
   font-family: 'PiersonDemo';
   font-weight: bold;
   color: #56513D;
+  margin-top: -20px;
+  letter-spacing: 0.1em;
 }
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
   .details-container1-he {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 64px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .details-image-he {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 0px;
+  }
+
+  .details-image-dance-he {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 0px;
+  }
+
+  .details-image-chuppah-he {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 0px;
+  }
+
+  .details-heading-he {
+    font-size: 6em;
+    font-weight: lighter;
+  }
+
+  .details-time-he {
+    font-size: 1.5em;
+  }
+
+  .details-container1-he {
+    padding: 0 !important;
+    /* Use !important to ensure the padding is set to 0 */
+    padding-left: 0 !important;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 485px) {
+  .details-container1-he {
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 5px !important;
+    /* Use !important to ensure the padding is set to 0 */
+  }
+
+  .details-container-he {
+    overflow-x: hidden;
+    width: 100%;
+    margin: auto;
+    padding: 0 5px;
+  }
+
+  .details-image-chuppah-he {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    margin-bottom: 0;
+  }
+
+  .details-event-wrapper-he {
+    margin: 0px;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .details-heading-he {
+    font-size: 5em;
+    font-weight: lighter;
+  }
+
+  .details-time-he {
+    margin-top: -30px;
+  }
+
+  .details-event-he {
+    margin-bottom: 10px;
   }
 }

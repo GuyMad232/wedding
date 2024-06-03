@@ -3,16 +3,21 @@
 <div class="home-container">
     <div class="hero-container">
         <header data-thq="thq-navbar" class="hero-navbar-interactive hero-navbar">
+            <div class="logo">
+                <a href="#Invitation" class="hero-link">
+                    <img alt="image" src="{% static 'images/save1-200h.png' %}" class="hero-image" />
+                </a>
+            </div>
             <div data-thq="thq-navbar-nav" class="hero-desktop-menu">
                 <a href="#Invitation" class="hero-link">
                     <img alt="image" src="{% static 'images/save1-200h.png' %}" class="hero-image" />
                 </a>
-                <nav class="hero-links">
-                    <a href="#UsefulInfo" class="hero-link2"><span>פרטים נוספים</span></a>
-                    <a href="#Details" class="hero-link1"><span>החתונה</span></a>
-                    <a href="#Location" class="hero-link2"><span>מיקום</span></a>
+                <nav class="hero-links-he">
+                    <a href="#UsefulInfo" class="hero-link2-he"><span>פרטים נוספים</span></a>
+                    <a href="#Details" class="hero-link1-he"><span>החתונה</span></a>
+                    <a href="#Location" class="hero-link2-he"><span>מיקום</span></a>
                 </nav>
-                <a href="#RSVP" class="hero-text3"><span>אישור הגעה</span></a>
+                <a href="#RSVP" class="hero-text3-he"><span>אישור הגעה</span></a>
             </div>
             <div data-thq="thq-burger-menu" class="hero-burger-menu">
                 <svg viewBox="0 0 1024 1024" class="hero-icon">
@@ -29,29 +34,34 @@
                         </div>
                     </div>
                     <nav class="hero-links1">
-                        <a href="#Details" class="hero-link3"><span>החתונה</span></a>
-                        <a href="#Location" class="hero-link4"><span>מיקום</span></a>
-                        <a href="#UsefulInfo" class="hero-link5"><span>פרטים נוספים</span></a>
-                        <a href="#RSVP" class="hero-link5"><span>אישור הגעה</span></a>
+                        <a href="#Details" class="hero-link3-he"><span>החתונה</span></a>
+                        <a href="#Location" class="hero-link3-he"><span>מיקום</span></a>
+                        <a href="#UsefulInfo" class="hero-link3-he"><span>פרטים נוספים</span></a>
+                        <a href="#RSVP" class="hero-link3-he"><span>אישור הגעה</span></a>
                     </nav>
                 </div>
             </div>
         </header>
-        <img alt="image" src="{% static 'images/envalope-600w.png' %}" id="Invitation" class="hero-image1">
+     
+        <div class="invitation-container">
+            <img src="{% static 'images/play-button.png' %}" alt="Play Animation" onclick="replayAnimation()" class="play-button">
+            <img alt="image" src="https://d16bqg9cd7djd.cloudfront.net/he_animation.webp" id="Invitation" class="hero-image1" />
+        </div>
+        
         <div id="RSVP" class="rsvp-container rsvp-root-class-name1">
             <h1><span>{{ guest.name }}</span></h1>
-            <span class="rsvp-text1"><span>אנא אשר/י הגעתך</span></span>
+            <span class="rsvp-text1-he"><span>אנא אשר/י הגעתך</span></span>
             <div class="rsvp-container1" id="rsvpContainer">
                 <form action="{% url 'response' guest.id %}" method="post">
                     {% csrf_token %}
                     <div class="button-container">
-                        <button type="submit" name="response" value="not_attending" class="rsvp-button"><span><span>לא אגיע</span></span></button>
-                        <button type="button" onclick="showAttendForm()" class="rsvp-button1"><span><span>אגיע</span></span></button>
+                        <button type="submit" name="response" value="not_attending" class="rsvp-button-he"><span><span>לא אגיע</span></span></button>
+                        <button type="button" onclick="showAttendForm()" class="rsvp-button1-he"><span><span>אגיע</span></span></button>
                     </div>
                     <div id="attendForm" class="attend-form" style="display:none;">
-                        <label for="num_guests" class="attend-label" style="direction: rtl;">כמה אורחים מגיעים ?</label>
+                        <label for="num_guests" class="attend-label-he" style="direction: rtl;">כמה אורחים מגיעים ?</label>
                         <input type="number" id="num_guests" name="num_guests" min="1" value="1" class="attend-input">
-                        <button type="submit" class="rsvp-button" name="response" value="attending"><span>שלח</span></button>
+                        <button type="submit" class="rsvp-button-he" name="response" value="attending"><span>שלח</span></button>
                     </div>
                 </form>
             </div>
@@ -71,6 +81,19 @@
             container.style.maxHeight = "initial"; // Reset to initial height
         }
     }
+
+    function replayAnimation() {
+        var img = document.getElementById('Invitation');
+        var src = img.src;
+        img.src = ""; // Clear the src to reset the animation
+        img.src = src; // Reassign the src to restart the animation
+    }
+
+    // Add event listener to the form submission
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('rsvpForm');
+        form.addEventListener('submit', function(event) {
+            alert("Your response has been recorded successfully.");
+        });
+    });
 </script>
-
-

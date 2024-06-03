@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'PiersonDemo';
+    src: url('/static/fonts/PiersonDemo.ttf') format('truetype');
+    color: #56513D;
+}
+
+@font-face {
+    font-family: 'zrima';
+    src: url('/static/fonts/Hebrew_zrima-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'josefin-sans-he';
+    src: url('/static/fonts/Josefin_sans_he-Regular.ttf') format('truetype');
+}
+
+
+.rsvp-text1-he {
+    font-size: 25px;
+    font-style: normal;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'josefin-sans-he';
+    color: #56513D;
+}
+
+
+.rsvp-button-he,
+.rsvp-button1-he {
+    color: #ffffff;
+    padding-top: var(--dl-space-space-oneandhalfunits);
+    padding-bottom: var(--dl-space-space-oneandhalfunits);
+    padding-left: var(--dl-space-space-oneandhalfunits);
+    padding-right: var(--dl-space-space-oneandhalfunits);
+    background-color: var(--dl-color-theme-accent2);
+    transition: transform 0.2s ease-in-out;
+    border-radius: var(--dl-radius-radius-buttonradius);
+    font-size: 20px;
+    /* Adjust this size as needed */
+    font-style: normal;
+    text-align: center;
+    font-family: 'josefin-sans-he';
+    font-weight: 400;
+    border: none;
+    margin-bottom: 20px;
+    /* Add this line to remove the border */
+}
+
+.attend-label-he {
+    margin: 8px 0;
+    display: block;
+    font-size: 25px;
+    /* Same as .rsvp-text1 */
+    font-style: normal;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'josefin-sans-he';
+    color: #56513D;
+}
+
+.hero-links-he {
+    gap: 128px;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    align-items: center;
+    margin-right: var(--dl-space-space-twounits);
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* Ensure all links and text are black and bold */
+.hero-link1-he,
+.hero-link2-he,
+.hero-link3-he,
+.hero-text-he,
+.hero-text3-he {
+    text-decoration: none;
+    color: #56513D;
+    font-weight: bold;
+    font-size: 35px;
+    font-family: 'zrima';
+    transition: transform 0.2s ease-in-out;
+    /* Smooth transition for hover effect */
+}
+
+/* Hover effect to make links slightly larger */
+.hero-link1-he:hover,
+.hero-link2-he:hover,
+.hero-link3-he:hover,
+.hero-text-he:hover,
+.hero-text3-he:hover {
+    transform: scale(1.1);
+    /* Slightly larger */
+    color: #56513D;
+    /* Ensure the color stays black on hover */
+}
+
+/* Prevent visited links from changing color */
+.hero-link1-he:visited,
+.hero-link2-he:visited,
+.hero-link3-he:visited,
+.hero-text-he:visited,
+.hero-text3-he:visited {
+    color: #56513D;
+}
+
+.hero-link1-he {
+    text-decoration: none;
+}
+
+.hero-link2-he {
+    margin-left: var(--dl-space-space-twounits);
+    text-decoration: none;
+}
+
+.hero-link3-he {
+    margin-left: var(--dl-space-space-twounits);
+    text-decoration: none;
+}
+
+.hero-text-he {
+    margin-left: var(--dl-space-space-twounits);
+}
+
+/* Ensure border and radius for hero-text3 */
+.hero-text3-he {
+    padding: var(--dl-space-space-unit);
+    text-align: center;
+    border-color: var(--dl-color-theme-neutral-dark);
+    border-style: double;
+    border-width: 1px;
+    margin-right: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-round);
+    text-decoration: none;
+    display: inline-block;
+    /* Ensure */
+}

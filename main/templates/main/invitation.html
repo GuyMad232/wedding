@@ -15,11 +15,13 @@
     <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"> 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero_he.css' %}">
     <link rel="stylesheet" href="{% static 'css/details.css' %}">
     <link rel="stylesheet" href="{% static 'css/details_he.css' %}">
     <link rel="stylesheet" href="{% static 'css/gallery-date.css' %}">
     <link rel="stylesheet" href="{% static 'css/location.css' %}">
     <link rel="stylesheet" href="{% static 'css/useful-info.css' %}">
+    <link rel="stylesheet" href="{% static 'css/useful-info_he.css' %}">
     <style>
         body {
             background-color: #EDEAE7;
@@ -83,6 +85,7 @@
             {% include 'main/includes/details_he.html' %}
             {% include 'main/includes/location_he.html' %}
             {% include 'main/includes/useful_info_he.html' %}
+            {% include 'main/includes/gallery-date2.html' %}
         {% else %}
             {% include 'main/includes/hero.html' %}
             {% include 'main/includes/gallery-date.html' %}
