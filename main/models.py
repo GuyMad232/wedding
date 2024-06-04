@@ -19,8 +19,9 @@ class Guest(models.Model):
     number_of_guests_invited = models.IntegerField(default=0)
     number_of_guests_attending = models.IntegerField(default=0)
     message = models.TextField(blank=True, null=True)  # Allow NULL values
-    email_sent = models.BooleanField(default=False)  # New field
-    identification = models.IntegerField(unique=True, null=True, blank=True)  # New field
+    email_sent = models.BooleanField(default=False)  
+    identification = models.IntegerField(unique=True, null=True, blank=True)  
+    link = models.URLField(blank=True, null=True)  # Allow NULL values
 
     def __str__(self):
         return self.name

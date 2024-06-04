@@ -40,13 +40,16 @@ class Command(BaseCommand):
                     email_sent_value = str(row[8]).strip().lower() if len(row) > 8 and row[8] is not None else 'false'
                     email_sent = email_sent_value in ['yes', 'true', '1']
                     message = str(row[7]).strip() if row[7] else None
+                    name = row[0].strip() if row[0] else ""
+                    identification = row_number - 1
+                    link = f"https://wedding-sjyr.onrender.com/invitation/{name}/{identification}"
 
                     logging.info(f"Processing row {row_number}: {row}")
                     logging.info(f"Parsed values - Attending: {attending}, Email Sent: {email_sent}")
 
                     guest = Guest.objects.create(
                         guest_list=guest_list,
-                        name=row[0].strip() if row[0] else "",
+                        name=name,
                         email=row[1].strip(),
                         phone=str(row[2]).strip() if row[2] else "",
                         country=row[3].strip() if row[3] else "",
@@ -55,7 +58,8 @@ class Command(BaseCommand):
                         number_of_guests_attending=int(row[6]) if row[6] else 0,
                         message=message,
                         email_sent=email_sent,
-                        identification=row_number - 1
+                        identification=identification,
+                        link=link
                     )
 
             self.stdout.write(self.style.SUCCESS('Guests imported successfully.'))
