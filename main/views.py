@@ -199,7 +199,7 @@ def guest_list(request):
     return render(request, 'main/guest_list.html', {'guests': guests, 'show_navbar': True})
 
 
-
+@never_cache
 def statistics(request):
     total_parties = Guest.objects.count()
     attending_parties = Guest.objects.filter(attending=True).count()
