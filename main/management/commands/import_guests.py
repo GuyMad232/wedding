@@ -29,6 +29,18 @@ class Command(BaseCommand):
                 defaults={'description': 'Auto-created main guest list'}
             )
 
+            # First pass to find the maximum ID in the file
+            max_id = 0
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                if len(row) > 9 and row[9] is not None:
+                    try:
+                        current_id = int(row[9])
+                        max_id = max(max_id, current_id)
+                    except ValueError:
+                        continue
+
+            next_id = max_id + 1
+
             # Delete all existing guests
             Guest.objects.all().delete()
             logging.info("All existing guests have been deleted.")
@@ -41,11 +53,22 @@ class Command(BaseCommand):
                     email_sent = email_sent_value in ['yes', 'true', '1']
                     message = str(row[7]).strip() if row[7] else None
                     name = row[0].strip() if row[0] else ""
-                    identification = row_number - 1
+
+                    # Determine the identification number
+                    if len(row) > 9 and row[9] is not None:
+                        try:
+                            identification = int(row[9])
+                        except ValueError:
+                            identification = next_id
+                            next_id += 1
+                    else:
+                        identification = next_id
+                        next_id += 1
+
                     link = f"https://wedding-sjyr.onrender.com/invitation/{name}/{identification}"
 
                     logging.info(f"Processing row {row_number}: {row}")
-                    logging.info(f"Parsed values - Attending: {attending}, Email Sent: {email_sent}")
+                    logging.info(f"Parsed values - Attending: {attending}, Email Sent: {email_sent}, ID: {identification}")
 
                     guest = Guest.objects.create(
                         guest_list=guest_list,

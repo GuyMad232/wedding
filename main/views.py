@@ -26,11 +26,15 @@ logger = logging.getLogger(__name__)
 
 def home(request):
     guests = Guest.objects.all()
-    
+
     if request.method == 'POST':
         if 'send_invitations' in request.POST:
             for guest in guests:
                 if not guest.email_sent:
+                    if '@' not in guest.email:
+                        # Skip sending email if the email does not contain '@'
+                        continue
+                    
                     try:
                         static_image_url = "https://dl.dropboxusercontent.com/scl/fi/ruo4jlhoj3ajjobe7yfe4/email_envalope.png?rlkey=imzfzzp9dghevrqneuxcc1s0k&st=ssjaknly"
                         
