@@ -6,6 +6,7 @@ from django.utils.html import format_html
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 import openpyxl
 from openpyxl import Workbook
 from django.urls import reverse
@@ -23,7 +24,7 @@ import datetime
 # Create your views here.
 
 logger = logging.getLogger(__name__)
-
+@csrf_protect
 def home(request):
     guests = Guest.objects.all()
 
@@ -99,7 +100,7 @@ def home(request):
     guests = Guest.objects.all()
     return render(request, 'main/home.html', {'show_navbar': True, 'guests': guests})
 
-
+@csrf_protect
 def export_guests(request):
     wb = Workbook()
     ws = wb.active
@@ -135,7 +136,7 @@ def export_guests(request):
 def serve_apng(request):
     return redirect('https://d16bqg9cd7djd.cloudfront.net/en_animation.webp')
     
-
+@csrf_protect
 def invitation(request, name, identification):
     # Determine if the navbar should be shown based on 'admin' access
     show_navbar = (name.lower() == 'admin')
@@ -173,7 +174,7 @@ def invitation(request, name, identification):
 
 
 
-
+@csrf_protect
 def guest_response(request, guest_id):
     guest = get_object_or_404(Guest, pk=guest_id)
     if request.method == 'POST':
