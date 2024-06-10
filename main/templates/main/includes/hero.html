@@ -1,5 +1,4 @@
 {% load static %}
-<!-- main/includes/hero.html -->
 <div class="home-container">
     <div class="hero-container">
         <header data-thq="thq-navbar" class="hero-navbar-interactive hero-navbar">
@@ -93,7 +92,12 @@
     document.addEventListener('DOMContentLoaded', function() {
         var form = document.getElementById('rsvpForm');
         form.addEventListener('submit', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Show the alert and resubmit the form after clicking OK
             alert("Your response has been recorded successfully.");
+            form.submit();
         });
     });
 </script>
