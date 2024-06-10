@@ -1,4 +1,5 @@
 {% load static %}
+<!-- main/includes/hero.html -->
 <div class="home-container">
     <div class="hero-container">
         <header data-thq="thq-navbar" class="hero-navbar-interactive hero-navbar">
@@ -51,7 +52,7 @@
             <h1><span>{{ guest.name }}</span></h1>
             <span class="rsvp-text1-he"><span>אנא אשר/י הגעתך</span></span>
             <div class="rsvp-container1" id="rsvpContainer">
-                <form id="rsvpForm" action="{% url 'response' guest.id %}" method="post">
+                <form action="{% url 'response' guest.id %}" method="post">
                     {% csrf_token %}
                     <div class="button-container">
                         <button type="submit" name="response" value="not_attending" class="rsvp-button-he"><span><span>לא אגיע</span></span></button>
@@ -90,20 +91,9 @@
 
     // Add event listener to the form submission
     document.addEventListener('DOMContentLoaded', function() {
-        console.log("DOMContentLoaded event fired."); // Add a log to check if this part is reached
         var form = document.getElementById('rsvpForm');
-        if (form) {
-            console.log("Form found: ", form); // Add a log to check if the form is found
-            form.addEventListener('submit', function(event) {
-                // Prevent the default form submission
-                event.preventDefault();
-
-                // Show the alert and resubmit the form after clicking OK
-                alert("תגובתך נרשמה בהצלחה");
-                form.submit();
-            });
-        } else {
-            console.log("Form not found."); // Add a log to check if the form is not found
-        }
+        form.addEventListener('submit', function(event) {
+            alert("Your response has been recorded successfully.");
+        });
     });
 </script>
