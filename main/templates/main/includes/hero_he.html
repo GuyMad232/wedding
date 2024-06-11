@@ -50,7 +50,11 @@
         
         <div id="RSVP" class="rsvp-container rsvp-root-class-name1">
             <h1><span>{{ guest.name }}</span></h1>
-            <span class="rsvp-text1-he"><span>אנא אשר/י הגעתך</span></span>
+            {% if guest.attending is None %}
+                <span class="rsvp-text1-he"><span>אנא אשר/י הגעתך</span></span>
+            {% else %}
+                <span class="rsvp-text1-he"><span>ניתן לשנות סטטוס הגעה בכפתורים מטה</span></span>
+            {% endif %}
             <div class="rsvp-container1" id="rsvpContainer">
                 <form action="{% url 'response' guest.id %}" method="post">
                     {% csrf_token %}
@@ -89,11 +93,11 @@
         img.src = src; // Reassign the src to restart the animation
     }
 
-    // Add event listener to the form submission
+    // Check for the status query parameter and show an alert if present
     document.addEventListener('DOMContentLoaded', function() {
-        var form = document.getElementById('rsvpForm');
-        form.addEventListener('submit', function(event) {
-            alert("Your response has been recorded successfully.");
-        });
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'success') {
+            alert("תגובתך נרשמה בהצלחה");
+        }
     });
 </script>

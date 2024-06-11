@@ -186,9 +186,8 @@ def guest_response(request, guest_id):
             guest.attending = True
             guest.number_of_guests_attending = request.POST.get('num_guests', 0)
         guest.save()
-        return redirect(reverse('invitation', args=[guest.name, guest.identification]))  # Redirect to the invitation page or a confirmation page
+        return redirect(f"{reverse('invitation', args=[guest.name, guest.identification])}?status=success")  # Redirect to the invitation page with status parameter
     return render(request, 'main/invitation.html', {'guest': guest})
-
 
 
 @never_cache
