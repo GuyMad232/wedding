@@ -47,7 +47,9 @@
             <img src="{% static 'images/play-button.png' %}" alt="Play Animation" onclick="replayAnimation()" class="play-button">
             <img alt="image" src="{% url 'serve_apng' %}" id="Invitation" class="hero-image1" />
         </div>
-        
+        <div>
+            <img src="{% static 'images/arrowdown.webp' %}" alt="Scroll Down" class="arrowdown" id="arrowdown" />
+        </div>
         <div id="RSVP" class="rsvp-container rsvp-root-class-name1">
             <h1 class="guest-name"><span>{{ guest.name }}</span></h1>
             {% if guest.attending is None %}
@@ -100,4 +102,48 @@
             alert("Your response has been recorded successfully.");
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const arrow = document.getElementById('arrowdown');
+    let isScrolling;
+    let showArrowTimeout;
+
+    function checkScrollPosition() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        if (scrollTop + windowHeight >= documentHeight - 5) {
+            arrow.style.display = 'none';
+            clearTimeout(showArrowTimeout);
+        } else {
+            // Clear previous timeout and set a new one to delay the visibility
+            clearTimeout(showArrowTimeout);
+            showArrowTimeout = setTimeout(() => {
+                arrow.style.display = 'block';
+            }, 3000); // 3-second delay
+        }
+    }
+
+    window.addEventListener('scroll', function() {
+        arrow.style.display = 'none'; // Hide arrow while scrolling
+
+        // Clear our timeout throughout the scroll
+        window.clearTimeout(isScrolling);
+
+        // Set a timeout to run after scrolling ends
+        isScrolling = setTimeout(function() {
+            checkScrollPosition();
+        }, 300); // 300ms delay after user stops scrolling
+    });
+
+    window.addEventListener('resize', function() {
+        clearTimeout(showArrowTimeout); // Clear any visibility timeout
+        checkScrollPosition(); // Immediately check position on resize
+    });
+
+    // Initial check to set the correct arrow visibility on load
+    checkScrollPosition();
+});
+    
 </script>

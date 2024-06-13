@@ -375,6 +375,22 @@
   /* Ensure the play button is above other elements */
 }
 
+.arrowdown {
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+  object-fit: contain;
+  position: fixed;
+  /* Position left based on the width of the invitation image */
+  top: 80%;
+  right: 0;
+  /* Center vertically */
+  transform: translateY(-50%);
+  /* Adjust for the button's height */
+  z-index: 1;
+  /* Ensure the play button is above other elements */
+}
+
 .hero-burger-menu {
   display: none;
   position: absolute;
@@ -408,6 +424,10 @@
 
   .play-button {
     left: calc(50% - 45vw);
+  }
+
+  .arrowdown {
+    right: 0;
   }
 
   .hero-mobile-menu {
@@ -489,9 +509,20 @@
   }
 }
 
+@media(max-width: 500px) {
+  .arrowdown {
+    right: -38px;
+  }
+}
+
+
 @media(max-width: 400px) {
   .play-button {
     left: calc(50% - 47vw);
+  }
+
+  .arrowdown {
+    right: -38px;
   }
 
 }
