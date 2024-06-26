@@ -24,6 +24,24 @@ import datetime
 # Create your views here.
 
 logger = logging.getLogger(__name__)
+
+def send_invitation_email(guest, subject, template_name, context):
+    try:
+        message = render_to_string(template_name, context)
+        send_mail(
+            subject,
+            '',  # Empty plain text message
+            'guyandaaliyahwedding@gmail.com',
+            [guest.email],
+            fail_silently=False,
+            html_message=message,
+        )
+        guest.email_sent = True
+        guest.save()
+    except AttributeError:
+        # Handle the case where render_to_string fails
+        pass
+
 @csrf_protect
 def home(request):
     guests = Guest.objects.all()
@@ -35,38 +53,37 @@ def home(request):
                     if '@' not in guest.email:
                         # Skip sending email if the email does not contain '@'
                         continue
-                    
-                    try:
-                        static_image_url = "https://dl.dropboxusercontent.com/scl/fi/ruo4jlhoj3ajjobe7yfe4/email_envalope.png?rlkey=imzfzzp9dghevrqneuxcc1s0k&st=ssjaknly"
-                        
-                        context = {
-                            'guest_name': guest.name,
-                            'invitation_url': f"https://wedding-sjyr.onrender.com/invitation/{guest.name}/{guest.identification}",
-                            'static_image_url': static_image_url
-                        }
-                        
-                        if guest.country.lower() == 'israel':
-                            subject = 'הזמנה לחתונה גיא ואליה'
-                            message = render_to_string('main/email_body_he.html', context)
-                        else:
-                            subject = 'The Wedding of Aaliyah and Guy'
-                            message = render_to_string('main/email_body_en.html', context)
 
-                        send_mail(
-                            subject,
-                            '',  # Empty plain text message
-                            'guyandaaliyahwedding@gmail.com',
-                            [guest.email],
-                            fail_silently=False,
-                            html_message=message,
-                        )
-                        guest.email_sent = True
-                        guest.save()
-                    except AttributeError:
-                        message = f'Hi {guest.name}, here is your invitation.'
+                    static_image_url = "https://dl.dropboxusercontent.com/scl/fi/ruo4jlhoj3ajjobe7yfe4/email_envalope.png?rlkey=imzfzzp9dghevrqneuxcc1s0k&st=ssjaknly"
 
-            messages.success(request, "Invitations sent successfully!")
+                    context = {
+                        'guest_name': guest.name,
+                        'invitation_url': f"https://wedding-sjyr.onrender.com/invitation/{guest.name}/{guest.identification}",
+                        'static_image_url': static_image_url
+                    }
+
+                    if guest.country.lower() == 'israel':
+                        subject = 'הזמנה לחתונה גיא ואליה'
+                        template_name = 'main/email_body_he.html'
+                    else:
+                        subject = 'The Wedding of Aaliyah and Guy'
+                        template_name = 'main/email_body_en.html'
+
+                    send_invitation_email(guest, subject, template_name, context)
+
+                elif guest.country.lower() == 'america' and guest.attending is None and '@' in guest.email:
+                    context = {
+                        'guest_name': guest.name,
+                        'invitation_url': f"https://wedding-sjyr.onrender.com/invitation/{guest.name}/{guest.identification}"
+                    }
+                    subject = 'The Wedding of Aaliyah and Guy - Reminder'
+                    template_name = 'main/email_reminder.html'
+
+                    send_invitation_email(guest, subject, template_name, context)
+
+            messages.success(request, "Invitations and reminders sent successfully!")
             return redirect('home')
+
         elif 'import_guests' in request.POST:
             if 'guest_file' in request.FILES:
                 guest_file = request.FILES['guest_file']
@@ -99,6 +116,7 @@ def home(request):
     # Ensure fetching the latest data
     guests = Guest.objects.all()
     return render(request, 'main/home.html', {'show_navbar': True, 'guests': guests})
+
 
 @csrf_protect
 def export_guests(request):
